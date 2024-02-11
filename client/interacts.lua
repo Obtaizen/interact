@@ -1,3 +1,24 @@
+local interactions = require 'client.interactions'
+local utils = require 'client.utils'
+local settings = require 'shared.settings'
+local textures = settings.Textures
+local CURRENT_SELECTION = 1
+local CURRENT_OPTION = 0
+
+-- CACHE
+local SetDrawOrigin = SetDrawOrigin
+local DrawSprite = DrawSprite
+local ClearDrawOrigin = ClearDrawOrigin
+local Wait = Wait
+local IsControlJustPressed = IsControlJustPressed
+local SetScriptGfxAlignParams = SetScriptGfxAlignParams
+local ResetScriptGfxAlign = ResetScriptGfxAlign
+local IsNuiFocused = IsNuiFocused
+local IsPedDeadOrDying = IsPedDeadOrDying
+local IsPedCuffed = IsPedCuffed
+
+local selected, unselected, interact, pin = textures.selected, textures.unselected, textures.interact, textures.pin
+
 local function createOptions(coords, options)
     local width = utils.getOptionsWidth(options)
     if #options == 1 then
