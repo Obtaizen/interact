@@ -5,14 +5,14 @@
 -- 4. Enjoy your new style!
 
 return {
-    Style = 'gold_circle', -- gold_circle (default), blue_circle, green_square, glitch 
+    Style = 'obtaizen_ui', -- gold_circle (default), blue_circle, green_square, glitch 
     Textures = { -- Do not change
-        pin = 'pin',
-        interact = 'interact',
-        selected = 'selected',
-        unselected = 'unselected',
-        select_opt = 'select_opt',
-        unselect_opt = 'unselect_opt',
+        pin = 'point',
+        interact = 'key',
+        selected = 'label',
+        unselected = 'label_no',
+        select_opt = 'circle_selected',
+        unselect_opt = 'circle',
     },
 
     -- Nearby object distance check.
