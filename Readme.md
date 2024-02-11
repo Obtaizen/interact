@@ -10,6 +10,8 @@ Create interaction points in the world with selectable options.
 
 [Snipe](https://github.com/pushkart2)
 
+[Obtaizen](https://github.com/Obtaizen)
+
 # Guides & Information
 
 [Video Demo 1](https://youtu.be/dQ7Pdq1pdHQ)
