@@ -5,6 +5,7 @@
 -- 4. Enjoy your new style!
 
 return {
+    Debug = GetConvar('debug', 'false') == 'true' and true or false, -- Enable / Disable debug mode
     Style = 'obtaizen_ui', -- gold_circle (default), blue_circle, green_square, glitch 
     Textures = { -- Do not change
         pin = 'point',
@@ -13,6 +14,12 @@ return {
         unselected = 'label_no',
         select_opt = 'circle_selected',
         unselect_opt = 'circle',
+    },
+    Disable = {
+        onDeath = true, -- Disable interactions on death
+        onNuiFocus = true, -- Disable interactions while NUI is focused
+        onVehicle = true, -- Disable interactions while in a vehicle
+        onHandCuff = true, -- Disable interactions while handcuffed
     },
 
     -- Nearby object distance check.
