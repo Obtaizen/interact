@@ -46,16 +46,9 @@ local function filterInteractions()
 
     local newInteractions = {}
     local amount = 0
-
-    for i = 1, #interactions do
-        local interaction = interactions[i]
-
-        if interaction.groups then
-
-        end
-
+    for k ,v in pairs(interactions) do
         amount += 1
-        newInteractions[amount] = interaction
+        newInteractions[amount] = v
     end
 
     filteredInteractions = newInteractions
@@ -148,11 +141,11 @@ function api.addLocalEntityInteraction(data)
         end
         return
     end
-
+    local id = #interactions + 1
     -- If then entity not registered yet, add it
     if not ENTITIES[entity] then
         log:debug('Adding entity %s to interactions', entity)
-        local id = #interactions + 1
+        
         interactions[id] = {
             id = id,
             name = data.name or 'interaction:'..id,
@@ -236,12 +229,12 @@ function api.addEntityInteraction(data)
         data.entity = entity
         return api.addLocalEntityInteraction(data)
     end
-
+    local id = #interactions + 1
     -- If then netId not registered yet, add it
     if not NETWORKED_ENTITIES[netId] then
         log:debug('Adding networkID %s to interactions', netId)
 
-        local id = #interactions + 1
+        
         interactions[id] = {
             id = id,
             name = data.name or 'interaction:'..id,
@@ -397,12 +390,11 @@ end exports('AddModelInteraction', api.addModelInteraction)
 ---@param id number : The id of the interaction to remove
 -- Remove an interaction point by id.
 function api.removeInteraction(id)
-    if interactions[id] then
-        interactions[id] = nil
-        log:debug('Removed interaction %s', id)
-        filterInteractions()
-    end
-end exports('RemoveInteraction', api.removeInteraction)
+    interactions[id] = nil
+    log:debug('Removed interaction %s', id)
+    filterInteractions()
+end 
+exports('RemoveInteraction', api.removeInteraction)
 
 ---@param entity number : The entity to remove the interaction from
 -- Remove an interaction point by entity.
@@ -523,8 +515,12 @@ function api.getNearbyInteractions()
                         if MODELS[hash].options[id].canInteract then
                             item.canInteract = MODELS[hash].options[id].canInteract
                         end
-                        if item.canInteract and not item.canInteract() then
-                            v[id] = nil
+                        if item.canInteract then
+                            local canInteract = false
+                            pcall(function()
+                                canInteract = item.canInteract(nearby.object, nearby.coords, item.args)
+                            end)
+                            v[id] = canInteract and item or nil
                         end
                     end
                 end
@@ -582,7 +578,7 @@ AddEventHandler('onClientResourceStop', function(resource)
         local interaction = interactions[i]
 
         if interaction.resource == resource then
-            api.removeInteraction(i)
+            api.removeInteraction(interaction.id)
         end
     end
 end)
