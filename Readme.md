@@ -200,3 +200,6 @@ exports.interact:RemoveGlobalVehicleInteraction(interactionID)
 -- Remove an player interaction by id.
 exports.interact:RemoveGlobalPlayerInteraction(interactionID)
 ```
+![Discord_E2iAepYr27](https://github.com/user-attachments/assets/2ab9176b-01ba-4781-b986-4b026f176d5e)
+![Discord_e3Gv1JdZLQ](https://github.com/user-attachments/assets/dc3e40bb-bf8e-4b2b-b970-6027b08a8f66)
+
